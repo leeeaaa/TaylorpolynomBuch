@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Beispiel &mdash; LEAN Buch 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Index" href="genindex.html" />
+    <link rel="prev" title="2. Definition" href="02_Definition.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LEAN Buch
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Introduction.html">1. Einleitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Definition.html">2. Definition</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Beispiel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ableitungen-bestimmen">3.1. Ableitungen bestimmen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#werte-der-ableitungen-am-entwicklungspunkt-berechnen">3.2. Werte der Ableitungen am Entwicklungspunkt berechnen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#werte-in-die-formel-einsetzen">3.3. Werte in die Formel einsetzen</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LEAN Buch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>Beispiel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/03_Beispiel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="beispiel">
+<span id="id1"></span><h1><span class="section-number">3. </span>Beispiel<a class="headerlink" href="#beispiel" title="Permalink to this heading">&#61633;</a></h1>
+<p>Wir wollen nun am Beispiel der Funktion</p>
+<div class="math notranslate nohighlight">
+\[f(x) = 7x^4 + x^3 + 3x^2 + 5x - 7\]</div>
+<p>das Taylorpolynon des 4. Grades aufstellen. Als Entwicklungspunkt w&#228;hlen wir den Punkt <span class="math notranslate nohighlight">\(x_0 = 1\)</span></p>
+<p>Wir haben also gegeben</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = 7x^4 + x^3 + 3x^2 + 5x - 7\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_0 = 1\)</span> und</p></li>
+<li><p><span class="math notranslate nohighlight">\(n = 4\)</span>.</p></li>
+</ul>
+<p>Bevor wir mit dem ersten Schritt loslegen m&#252;ssen wir zuerst die Funktion <span class="math notranslate nohighlight">\(f\)</span> implementieren.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=def%20f%20(x%3A%20nat)%20%3A%3D%20()%20--%20dein%20Code%20hier" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="o">()</span> <span class="c1">-- dein Code hier</span>
+</pre></div>
+</div>
+</div><p>Um deine Funktion zu &#252;berpr&#252;fen kannst du die folgenden beiden Werte ausrechnen lassen:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(0) = -7\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(5) = 13768\)</span></p></li>
+</ul>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=%23eval%20f%200%20%20%20%20%20%20%20--%20-7%0A%23eval%20f%205%20%20%20%20%20%20%20--%2013768" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#eval</span> <span class="n">f</span> <span class="mi">0</span>       <span class="c1">-- -7</span>
+<span class="k">#eval</span> <span class="n">f</span> <span class="mi">5</span>       <span class="c1">-- 13768</span>
+</pre></div>
+</div>
+</div><p>Eine weitere Formel die wir aufstellen m&#252;ssen, bevor wir loslegen k&#246;nnen ist die Fakult&#228;tsfunktion.
+Zur Erinnerung es gibt 2 F&#228;lle:
+- Fakult&#228;t von 0 ergibt 1,
+- Fakult&#228;t von n ergibt n * Fakult&#228;t von n-1</p>
+<p>Kopiere den Codeschnipsel raus und vervollst&#228;ndige die Fakult&#228;tsfunktion.
+Mithilfe der <em>#eval</em> Statements kannst du deine Definition &#252;berpr&#252;fen.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=def%20fac%20%3A%20%E2%84%95%20%E2%86%92%20%E2%84%95%0A%7C%20--%20dein%20Code%20hier%0A%7C%20--%20dein%20Code%20hier%0A%0A--%20Test%0A%23eval%20fac%200%20%20%20%20%20--%201%0A%23eval%20fac%205%20%20%20%20%20--%20120" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">fac</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+<span class="bp">|</span> <span class="c1">-- dein Code hier</span>
+<span class="bp">|</span> <span class="c1">-- dein Code hier</span>
+
+<span class="c1">-- Test</span>
+<span class="k">#eval</span> <span class="n">fac</span> <span class="mi">0</span>     <span class="c1">-- 1</span>
+<span class="k">#eval</span> <span class="n">fac</span> <span class="mi">5</span>     <span class="c1">-- 120</span>
+</pre></div>
+</div>
+</div><section id="ableitungen-bestimmen">
+<h2><span class="section-number">3.1. </span>Ableitungen bestimmen<a class="headerlink" href="#ableitungen-bestimmen" title="Permalink to this heading">&#61633;</a></h2>
+<p>Im 1. Schritt m&#252;ssen die Ableitungen definiert werden.
+Da wir das Taylorpolynom des 4. Grades berechnen wollen, ben&#246;tigen wir die ersten 4 Ableitungen der Funktion <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p>Kopiere die unteren Codeschnipsel und f&#252;ge jeweils die Ableitungen hinzu.
+Um dein Ergebnis zu testen, kannst du wieder die <em>#eval</em> Statements ausf&#252;hren.
+Kommen die Ergebnisse, die als Kommentar dahinter notiert sind raus, so ist die Ableitung korrekt.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=--%201.%20Ableitungen%20definieren%0Adef%20f'%20(x%3A%20nat)%20%3A%3D%20()%20--%20dein%20Code%20hier%0A%0A--%20Test%0A%23eval%20f'%200%20%20%20%20%20%20--%205%0A%23eval%20f'%205%20%20%20%20%20%20--%202735" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 1. Ableitungen definieren</span>
+<span class="kd">def</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="o">()</span> <span class="c1">-- dein Code hier</span>
+
+<span class="c1">-- Test</span>
+<span class="k">#eval</span> <span class="n">f&#39;</span> <span class="mi">0</span>      <span class="c1">-- 5</span>
+<span class="k">#eval</span> <span class="n">f&#39;</span> <span class="mi">5</span>      <span class="c1">-- 2735</span>
+</pre></div>
+</div>
+</div><div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=--%202.%20Ableitung%20definieren%0Adef%20f''%20(x%3A%20nat)%20%3A%3D%20()%20--%20dein%20Code%20hier%0A%0A--%20Test%0A%23eval%20f''%200%20%20%20%20%20--%206%0A%23eval%20f''%205%20%20%20%20%20--%201611" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 2. Ableitung definieren</span>
+<span class="kd">def</span> <span class="n">f&#39;&#39;</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="o">()</span> <span class="c1">-- dein Code hier</span>
+
+<span class="c1">-- Test</span>
+<span class="k">#eval</span> <span class="n">f&#39;&#39;</span> <span class="mi">0</span>     <span class="c1">-- 6</span>
+<span class="k">#eval</span> <span class="n">f&#39;&#39;</span> <span class="mi">5</span>     <span class="c1">-- 1611</span>
+</pre></div>
+</div>
+</div><div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=--%203.%20Ableitung%20definieren%0Adef%20f'''%20(x%3A%20nat)%20%3A%3D%20()%20--%20dein%20Code%20hier%0A%0A--%20Test%0A%23eval%20f'''%200%20%20%20%20--%206%0A%23eval%20f'''%205%20%20%20%20--%20636" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 3. Ableitung definieren</span>
+<span class="kd">def</span> <span class="n">f&#39;&#39;&#39;</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="o">()</span> <span class="c1">-- dein Code hier</span>
+
+<span class="c1">-- Test</span>
+<span class="k">#eval</span> <span class="n">f&#39;&#39;&#39;</span> <span class="mi">0</span>    <span class="c1">-- 6</span>
+<span class="k">#eval</span> <span class="n">f&#39;&#39;&#39;</span> <span class="mi">5</span>    <span class="c1">-- 636</span>
+</pre></div>
+</div>
+</div><div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=--%204.%20Ableitung%20definieren%0Adef%20f''''%20(x%3A%20nat)%20%3A%3D%20()%20--%20dein%20Code%20hier%0A%0A--%20Test%0A%23eval%20f''''%200%20%20%20--%20126%0A%23eval%20f''''%205%20%20%20--%20126" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 4. Ableitung definieren</span>
+<span class="kd">def</span> <span class="n">f&#39;&#39;&#39;&#39;</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="o">()</span> <span class="c1">-- dein Code hier</span>
+
+<span class="c1">-- Test</span>
+<span class="k">#eval</span> <span class="n">f&#39;&#39;&#39;&#39;</span> <span class="mi">0</span>   <span class="c1">-- 126</span>
+<span class="k">#eval</span> <span class="n">f&#39;&#39;&#39;&#39;</span> <span class="mi">5</span>   <span class="c1">-- 126</span>
+</pre></div>
+</div>
+</div></section>
+<section id="werte-der-ableitungen-am-entwicklungspunkt-berechnen">
+<h2><span class="section-number">3.2. </span>Werte der Ableitungen am Entwicklungspunkt berechnen<a class="headerlink" href="#werte-der-ableitungen-am-entwicklungspunkt-berechnen" title="Permalink to this heading">&#61633;</a></h2>
+<p>Da LEAN die Werte selbst berechnen kann, k&#246;nnen wir uns diesen Schritt sparen.</p>
+<p>Wie in den <em>#eval</em> Statements schon gesehen, wird um eine Funktion/Definition mit einem Eingangsparameter zu berechnen, zuerst der Name der Funktion, dann ein Leerzeichen und dann die Zahl, die den Eingangsparameter darstellt geschrieben.
+Also z.B. <em>f&#8217; 0</em> bedeutet soviel wie <em>f&#8217;(0)</em>.</p>
+</section>
+<section id="werte-in-die-formel-einsetzen">
+<h2><span class="section-number">3.3. </span>Werte in die Formel einsetzen<a class="headerlink" href="#werte-in-die-formel-einsetzen" title="Permalink to this heading">&#61633;</a></h2>
+<p>Zur Erinnerung, die Formel lautet:</p>
+<div class="math notranslate nohighlight">
+\[T(x) = \sum_{k=0}^{n} \frac{f^(k)(x_0) \cdot (x - x_0)^1}{k!}\]</div>
+<p>Angewendet auf unseren Anwendungsfall mit :math:&#8217;n = 4&#8217; ergibt sich:</p>
+<div class="math notranslate nohighlight">
+\[T(x) = \sum_{k=0}^{4} \frac{f^(k)(1) \cdot (x - 1)^1}{k!}\]</div>
+<p>Nun k&#246;nnen wir mit den bereits definierten Ableitungen unsere Taylorpolynom-Formel aufstellen.
+:math:&#8217;x_0&#8217; geben wir vorerst als zweite Variable mit in unsere Taylorpolynom-Formel, so k&#246;nnen wir f&#252;r verschiedene Entwicklungspunkte das Taylorpolynom berechnen.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=def%20taylor%20(x%20%3A%20nat)%20(x0%20%3A%20nat)%20%3A%3D%20()%20--%20dein%20Code%20hier" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">taylor</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">x0</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="o">()</span> <span class="c1">-- dein Code hier</span>
+</pre></div>
+</div>
+</div><p>Jetzt wollen wir unsere Formel auf den Entwicklungspunkt :math:&#8217;x_0 = 1&#8217; anwenden und unser Ergebnis testen:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=%23eval%20taylor%200%201%20--%209%0A%23eval%20taylor%205%201%20--%203429" target="_blank">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#eval</span> <span class="n">taylor</span> <span class="mi">0</span> <span class="mi">1</span> <span class="c1">-- 9</span>
+<span class="k">#eval</span> <span class="n">taylor</span> <span class="mi">5</span> <span class="mi">1</span> <span class="c1">-- 3429</span>
+</pre></div>
+</div>
+</div></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="02_Definition.html" class="btn btn-neutral float-left" title="2. Definition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="genindex.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lea Soffel.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
